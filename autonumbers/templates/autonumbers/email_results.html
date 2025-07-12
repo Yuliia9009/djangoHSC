@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            padding: 20px;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            border: 1px solid #ddd;
+            border-top: none;
+            padding: 15px;
+            border-radius: 0 0 5px 5px;
+        }
+        .plate {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .footer {
+            font-size: 0.9em;
+            margin-top: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>🔔 Знайдено номерні знаки</h2>
+    </div>
+    <div class="content">
+        <p><strong>Комбінація:</strong> {{ subscription.digits|default:"(не вказано)" }}</p>
+        <p><strong>Область:</strong> {{ subscription.region.name }}</p>
+        <p><strong>ТСЦ:</strong> {{ subscription.selected_tsc.name|default:"(не вказано)" }}</p>
+
+        <h4>✅ Доступні номерні знаки:</h4>
+        {% if results %}
+            {% for plate in results %}
+                <div class="plate">
+                    <strong>{{ plate.number }}</strong> — {{ plate.price|floatformat:0 }} грн
+                    {% if plate.location %}<br><small>{{ plate.location }}</small>{% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>(Немає номерів для відображення)</p>
+        {% endif %}
+
+    <p style="text-align:center; margin-top: 20px;">
+      <a href="http://127.0.0.1:8000/autonumbers/profile/" style="padding: 10px 20px; background-color: #333333; color: #fff; border-radius: 5px; text-decoration: none;">
+        🔍 Переглянути запит на сайті
+      </a>
+    </p>
+
+        <div class="footer">
+            З повагою,<br>
+            команда <strong>AutoНомера</strong>
+        </div>
+    </div>
+</body>
+</html>

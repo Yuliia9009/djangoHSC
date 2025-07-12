@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load form_tags %}
+
+{% block title %}Створити запит{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-light">Перевірка доступних номерних знаків для авто</h2>
+
+<form id="searchForm" method="post" class="bg-dark p-4 rounded border border-secondary shadow-sm w-100" style="max-width: 600px; margin: 0 auto;">
+  {% csrf_token %}
+
+  <div class="mb-3">
+    <label for="region" class="form-label text-light">Оберіть область:</label>
+    {{ form.region|add_class:"form-select bg-dark text-light border-secondary" }}
+  </div>
+
+  <div class="mb-3">
+    <label for="selected_tsc" class="form-label text-light">Оберіть ТСЦ:</label>
+    {{ form.selected_tsc|add_class:"form-select bg-dark text-light border-secondary" }}
+  </div>
+
+  <div class="mb-3">
+    <label for="vehicle_type" class="form-label text-light">Оберіть тип транспорту:</label>
+    {{ form.vehicle_type|add_class:"form-select bg-dark text-light border-secondary" }}
+  </div>
+
+  <div class="mb-3">
+    <label for="digits" class="form-label text-light">*Бажана комбінація:</label>
+    {{ form.digits|add_class:"form-control bg-dark text-light border border-secondary" }}
+    <div class="form-text text-secondary">*Необов'язкове поле</div>
+  </div>
+
+  <button type="submit" class="btn btn-outline-light w-100 mt-3">🔍 Переглянути</button>
+</form>
+
+<script src="{% static 'autonumbers/js/load_tscs.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+{% endblock %}

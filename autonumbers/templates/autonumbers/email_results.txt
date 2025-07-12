@@ -1,0 +1,17 @@
+Вітаємо!
+
+Ми знайшли вільні номерні знаки для вашого запиту:
+
+Комбінація: {{ subscription.digits|default:"(не вказано)" }}
+Область: {{ subscription.region.name }}
+ТСЦ: {{ subscription.selected_tsc.name|default:"(не вказано)" }}
+
+Доступні номери:
+{% for plate in results %}
+- {{ plate.number }} – {{ plate.price|floatformat:0 }} грн{% if plate.location %} – {{ plate.location }}{% endif %}
+{% empty %}
+(Немає номерів для відображення)
+{% endfor %}
+
+З повагою,
+команда AutoНомера

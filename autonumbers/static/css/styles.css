@@ -1,0 +1,184 @@
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+a {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+header, footer {
+    background-color: #1f1f1f;
+    padding: 15px 20px;
+    border-bottom: 1px solid #333;
+}
+
+nav a {
+    color: #cccccc;
+    margin-right: 20px;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+table {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #444;
+}
+
+table th {
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+table th, table td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: left;
+}
+
+button, .btn {
+    background-color: #444;
+    border: 1px solid #666;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: #666;
+    color: #fff;
+}
+
+fieldset {
+    border: 1px solid #333;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+legend {
+    color: #aaa;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 6px;
+    border-radius: 4px;
+    width: 100%;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #666;
+    background-color: #ffffff;
+}
+
+/* Регистрация и вход */
+.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 40px 20px;
+}
+
+.auth-box {
+    animation: fadeIn 0.6s ease-in-out;
+    border: 1px solid #444;
+    max-width: 500px;
+    margin: auto;
+    background-color: rgba(31, 31, 31, 0.92);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-box .form-label {
+    font-weight: 500;
+    color: #ccc;
+}
+
+.auth-box input,
+.auth-box select,
+.auth-box textarea,
+.auth-box .form-control {
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-box input:focus,
+.auth-box select:focus,
+.auth-box textarea:focus {
+    border-color: #66ccff;
+    box-shadow: 0 0 5px rgba(102, 204, 255, 0.5);
+    outline: none;
+}
+
+.auth-box .btn {
+    margin-top: 1rem;
+}
+
+/*Индикатор загрузки*/
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(18, 18, 18, 0.85);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1.2rem;
+    text-align: center;
+}

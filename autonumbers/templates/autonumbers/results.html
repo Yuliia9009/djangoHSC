@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Результати пошуку{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Знайдені доступні номери</h2>
+
+  <!-- Фильтр -->
+  <div class="row g-2 mb-3 align-items-end">
+    <div class="col-md-3">
+      <label for="searchNumber" class="form-label">Пошук за номером</label>
+      <input type="text" class="form-control" id="searchNumber" placeholder="Напр. 7777">
+    </div>
+
+    <div class="col-md-2">
+      <label for="priceFilter" class="form-label">Ціна</label>
+      <select class="form-select" id="priceFilter">
+          <option value="">Усі</option>
+          <option value="2400">360</option>
+          <option value="2400">2400</option>
+          <option value="2400">4800</option>
+          <option value="2400">12000</option>
+          <option value="2400">18000</option>
+          <option value="60000">60000</option>
+          <option value="60000">96000</option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label for="tscFilter" class="form-label">ТСЦ</label>
+      <select class="form-select" id="tscFilter">
+        <option value="">Усі</option>
+      </select>
+    </div>
+
+    <div class="col-md-2">
+      <label for="sortPrice" class="form-label">Сортувати за ціною</label>
+      <select class="form-select" id="sortPrice">
+        <option value="">Без сортування</option>
+        <option value="asc">Зростання</option>
+        <option value="desc">Спадання</option>
+      </select>
+    </div>
+
+    <div class="col-md-2 d-flex gap-2">
+      <button id="applyFiltersBtn" class="btn btn-outline-primary w-100">Застосувати</button>
+      <button id="exportBtn" class="btn btn-outline-success w-100">Excel</button>
+    </div>
+  </div>
+
+  <!-- Таблица -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle text-center" id="resultsTable">
+      <thead class="table-light">
+        <tr>
+          <th>Номер</th>
+          <th>Ціна</th>
+          <th>Місце знаходження</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script id="resultsData" type="application/json">{{ raw_results_json|safe }}</script>
+
+  {% if digits %}
+    <form method="post" action="{% url 'subscribe_search' %}" class="mt-4">
+      {% csrf_token %}
+      <input type="hidden" name="region" value="{{ region }}">
+      <input type="hidden" name="tsc" value="{{ tsc }}">
+      <input type="hidden" name="vehicle_type" value="{{ vehicle_type }}">
+      <input type="hidden" name="digits" value="{{ digits }}">
+      <button type="submit" class="btn btn-success">🔔 Підписатися на пошук</button>
+    </form>
+  {% endif %}
+
+
+  <script src="{% static 'autonumbers/js/load_tscs.js' %}"></script>
+  <script src="{% static 'autonumbers/js/results.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+  <a href="{% url 'create_search' %}" class="btn btn-secondary mt-4">← Повернутися до пошуку</a>
+</div>
+{% endblock %}

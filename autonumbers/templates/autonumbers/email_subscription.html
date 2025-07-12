@@ -1,0 +1,9 @@
+<div style="font-family: Arial, sans-serif; background: #fff; padding: 20px; border-radius: 8px;">
+  <h2 style="color: #333333;">🔔 Ви підписалися на пошук номерів</h2>
+  <p><strong>Комбінація:</strong> {{ subscription.digits|default:"(не вказано)" }}</p>
+  <p><strong>Область:</strong> {{ subscription.region.name }}</p>
+  <p><strong>ТСЦ:</strong> {{ subscription.selected_tsc.name|default:"(не вказано)" }}</p>
+  <p><strong>Тип транспорту:</strong> {{ subscription.vehicle_type.name }}</p>
+  <hr>
+  <p>Ми повідомимо вас, коли з’являться доступні номерні знаки.</p>
+</div>

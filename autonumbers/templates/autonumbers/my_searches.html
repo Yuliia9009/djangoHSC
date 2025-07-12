@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Мої запити{% endblock %}
+{% block content %}
+<h2>Мої запити</h2>
+<ul>
+  {% for search in searches %}
+    <li>
+      {{ search.created_at|date:"d.m.Y H:i" }} — {{ search.region.name }} — {{ search.digits }}
+      {% if search.selected_tsc %} ({{ search.selected_tsc.name }}){% endif %}
+    </li>
+  {% empty %}
+    <li>Запитів ще немає.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

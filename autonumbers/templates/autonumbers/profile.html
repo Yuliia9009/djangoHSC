@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}Моя сторінка{% endblock %}
+{% load static %}
+
+{% block content %}
+<h2>Моя сторінка</h2>
+
+{% if success %}
+<p style="color: green;">Дані оновлено успішно!</p>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  <fieldset>
+    <legend>Оновити email та телефон</legend>
+    {{ email_form.as_p }}
+    <button type="submit" name="update_email_phone">Оновити</button>
+  </fieldset>
+</form>
+
+<form method="post">
+  {% csrf_token %}
+  <fieldset>
+    <legend>Змінити пароль</legend>
+    {{ password_form.as_p }}
+    <button type="submit" name="update_password">Оновити пароль</button>
+  </fieldset>
+</form>
+
+<hr>
+
+<h3>Мої підписки</h3>
+{% if subscriptions %}
+  <table border="1" cellpadding="6">
+    <thead>
+      <tr>
+        <th>Дата</th>
+        <th>Комбінація</th>
+        <th>Область</th>
+        <th>ТСЦ</th>
+        <th>Тип транспорту</th>
+        <th>Остання перевірка</th>
+        <th>Дія</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sub in subscriptions %}
+        <tr>
+          <td>{{ sub.created_at|date:"d.m.Y H:i" }}</td>
+          <td>{{ sub.digits }}</td>
+          <td>{{ sub.region.name }}</td>
+          <td>
+            {% if sub.selected_tsc %}
+              {{ sub.selected_tsc.name }}
+            {% else %}
+              Весь регіон
+            {% endif %}
+          </td>
+          <td>{{ sub.vehicle_type.name }}</td>
+          <td>
+              {% if sub.last_checked %}
+                {{ sub.last_checked|date:"d.m.Y H:i" }}
+              {% else %}
+                Ще не перевірено
+              {% endif %}
+            </td>
+          <td>
+            <form method="post" action="{% url 'cancel_subscription' sub.id %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-danger">Скасувати</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>Підписок ще немає.</p>
+{% endif %}
+
+<hr>
+
+<h3>Історія пошуків</h3>
+<table border="1" cellpadding="6">
+  <thead>
+    <tr>
+      <th>Дата</th>
+      <th>Комбінація</th>
+      <th>Область</th>
+      <th>ТСЦ</th>
+      <th>Тип транспорту</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in searches %}
+      <tr>
+        <td>{{ s.created_at|date:"d.m.Y H:i" }}</td>
+        <td>{{ s.digits }}</td>
+        <td>{{ s.region.name }}</td>
+        <td>
+          {% if s.selected_tsc %}
+            {{ s.selected_tsc.name }}
+          {% else %}
+            Весь регіон
+          {% endif %}
+        </td>
+        <td>{{ s.vehicle_type.name }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="6">Пошуків ще не було.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if searches %}
+  <form method="post" onsubmit="return confirm('Очистити всю історію пошуків?');">
+    {% csrf_token %}
+    <button type="submit" name="clear_search_history" class="btn btn-danger mt-3">Очистити історію пошуків</button>
+  </form>
+{% endif %}
+{% endblock %}

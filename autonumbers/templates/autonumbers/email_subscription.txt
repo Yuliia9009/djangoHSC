@@ -1,0 +1,10 @@
+Вітаємо!
+
+Ви успішно підписалися на моніторинг номерів:
+
+Комбінація: {{ subscription.digits|default:"(не вказано)" }}
+Область: {{ subscription.region.name }}
+ТСЦ: {{ subscription.selected_tsc.name|default:"(не вказано)" }}
+Тип транспорту: {{ subscription.vehicle_type.name }}
+
+Ми повідомимо вас, коли з’являться доступні номери.

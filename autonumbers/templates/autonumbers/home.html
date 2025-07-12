@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Головна сторінка{% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="text-center mb-5">
+  <h1 class="display-5 fw-bold text-light">🔍 Пошук вільних автономерів</h1>
+  <p class="lead text-secondary">Сервіс для перевірки доступних номерів на сайті
+    <a href="https://opendata.hsc.gov.ua/check-leisure-license-plates/" target="_blank" class="text-info">ГСЦ МВС</a>
+  </p>
+  <a href="{% url 'create_search' %}" class="btn btn-outline-light btn-lg mt-3">Створити запит</a>
+</div>
+
+{#Счетчик#}
+{#<div class="bg-black border border-secondary rounded text-center p-3 mb-5 shadow-sm">#}
+{#  <h5 class="mb-0">🔢 Всього знайдено номерів:</h5>#}
+{#  <h2 class="mt-2 text-success">{{ found_total }}</h2>#}
+{#</div>#}
+
+<div class="row text-center g-4 mb-5">
+  <div class="col-md-4">
+    <div class="p-4 border border-secondary rounded bg-black h-100">
+      <h4 class="text-white mb-2">⚡ Швидко</h4>
+      <p class="text-secondary">Пошук по всій Україні за 3 секунди</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="p-4 border border-secondary rounded bg-black h-100">
+      <h4 class="text-white mb-2">📬 Сповіщення</h4>
+      <p class="text-secondary">Підписка на email — отримуйте повідомлення про нові номери</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="p-4 border border-secondary rounded bg-black h-100">
+      <h4 class="text-white mb-2">💰 Безкоштовно</h4>
+      <p class="text-secondary">Жодних оплат — лише користь</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-dark border border-secondary rounded p-4 mb-5">
+  <h3 class="text-white mb-3">🛠 Як це працює</h3>
+  <ol class="text-secondary">
+    <li>Оберіть область, ТСЦ та тип транспорту</li>
+    <li>(Необов’язково) введіть бажану комбінацію цифр</li>
+    <li>Натисніть “Перевірити” — отримаєте результати</li>
+    <li>Хочете оновлення? — Підпишіться!</li>
+  </ol>
+</div>
+
+<div class="bg-black border border-secondary rounded p-4 mb-5">
+  <h3 class="text-white mb-3">❓ Часті питання</h3>
+  <ul class="text-secondary">
+    <li><strong>Чи потрібно реєструватися?</strong> — Так, у вас буде свій особистий кабінет з історією пошуку та підписками</li>
+    <li><strong>Навіщо підписка?</strong> — Щоб не пропустити потрібні номери</li>
+    <li><strong>Скільки це коштує?</strong> — Абсолютно безкоштовно</li>
+  </ul>
+</div>
+
+<div class="text-center mt-4">
+  <a href="{% url 'create_search' %}" class="btn btn-lg btn-outline-success">Розпочати зараз</a>
+</div>
+{% endblock %}

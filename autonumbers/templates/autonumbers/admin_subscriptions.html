@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% if request.user.is_staff %}
+  <a href="{% url 'admin_subscriptions' %}">⚙ Адмін-панель</a>
+{% endif %}
